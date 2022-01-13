@@ -11,6 +11,7 @@ class SlotMachine extends StatefulWidget {
 }
 
 class _SlotMachineState extends State<SlotMachine> {
+  bool isFirst = true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,7 +57,7 @@ class _SlotMachineState extends State<SlotMachine> {
                               width: 60,
                               child: RollerList(
                                 visibilityRadius: 0.0,
-                                // height: 50.0,
+                                height: 50.0,
                                 items: model.slots,
                                 enabled: false,
                                 key: model.leftRoller,
@@ -73,6 +74,7 @@ class _SlotMachineState extends State<SlotMachine> {
                             ),
                             Container(
                               width: 60,
+                              height: 50.0,
                               color: Colors.white,
                               child: RollerList(
                                 visibilityRadius: 0.0,
@@ -92,6 +94,7 @@ class _SlotMachineState extends State<SlotMachine> {
                             ),
                             Container(
                               width: 60,
+                              height: 50.0,
                               color: Colors.white,
                               child: RollerList(
                                 visibilityRadius: 0,
@@ -114,12 +117,14 @@ class _SlotMachineState extends State<SlotMachine> {
                 const SizedBox(
                   height: 16.0,
                 ),
-                if (!model.first.isNegative)
+                if (!model.first.isNegative && !isFirst)
                   const Text(
                     "Better Luck Next Time",
                     style: TextStyle(fontSize: 20.0),
                   ),
-                (model.first == model.second && model.first == model.third)
+                (model.first == model.second &&
+                        model.first == model.third &&
+                        !isFirst)
                     ? const Text(
                         "WIN!!!",
                         style: TextStyle(fontSize: 20.0),
@@ -131,6 +136,7 @@ class _SlotMachineState extends State<SlotMachine> {
                     model.startRotating();
                     Future.delayed(const Duration(milliseconds: 1500), () {
                       model.finishRotating();
+                      isFirst = false;
                     });
                   },
                   child: Container(
