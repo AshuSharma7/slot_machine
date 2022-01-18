@@ -34,85 +34,87 @@ class _SlotMachineState extends State<SlotMachine> {
                 const SizedBox(
                   height: 16.0,
                 ),
-                Stack(
-                  children: [
-                    Container(
-                      height: 500,
-                      child: Image.asset('assets/images/slot-machine.jpg',
-                          fit: BoxFit.cover),
-                    ),
-                    Positioned(
-                      left: 94,
-                      right: 94,
-                      bottom: 160,
-                      child: Container(
-                        // width: 150,
-                        // height: 50,
-                        // color: Colors.white,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            Container(
-                              color: Colors.white,
-                              width: 60,
-                              child: RollerList(
-                                visibilityRadius: 0.0,
+                Container(
+                  width: MediaQuery.of(context).size.width,
+                  height: 500,
+                  child: Stack(
+                    children: [
+                      Container(
+                        height: 500,
+                        child: Image.asset('assets/images/slot-machine.jpg',
+                            fit: BoxFit.cover),
+                      ),
+                      Positioned(
+                        left: 94,
+                        right: 94,
+                        bottom: 160,
+                        child: Container(
+                          height: 50.0,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              Container(
+                                color: Colors.white,
+                                width: 60,
+                                child: RollerList(
+                                  visibilityRadius: 0.0,
+                                  height: 50.0,
+                                  items: model.slots,
+                                  enabled: false,
+                                  key: model.leftRoller,
+                                  onSelectedIndexChanged: (value) {
+                                    setState(() {
+                                      model.first = value;
+                                    });
+                                  },
+                                ),
+                              ),
+                              VerticalDivider(
+                                width: 2,
+                                color: Colors.black,
+                              ),
+                              Container(
+                                width: 60,
                                 height: 50.0,
-                                items: model.slots,
-                                enabled: false,
-                                key: model.leftRoller,
-                                onSelectedIndexChanged: (value) {
-                                  setState(() {
-                                    model.first = value;
-                                  });
-                                },
+                                color: Colors.white,
+                                child: RollerList(
+                                  visibilityRadius: 0.0,
+                                  items: model.slots,
+                                  key: model.centerRoller,
+                                  onSelectedIndexChanged: (value) {
+                                    setState(() {
+                                      model.second = value;
+                                    });
+                                  },
+                                  // onScrollStarted: model.startRotating,
+                                ),
                               ),
-                            ),
-                            VerticalDivider(
-                              width: 2,
-                              color: Colors.black,
-                            ),
-                            Container(
-                              width: 60,
-                              height: 50.0,
-                              color: Colors.white,
-                              child: RollerList(
-                                visibilityRadius: 0.0,
-                                items: model.slots,
-                                key: model.centerRoller,
-                                onSelectedIndexChanged: (value) {
-                                  setState(() {
-                                    model.second = value;
-                                  });
-                                },
-                                // onScrollStarted: model.startRotating,
+                              VerticalDivider(
+                                width: 2,
+                                color: Colors.black,
                               ),
-                            ),
-                            VerticalDivider(
-                              width: 2,
-                              color: Colors.black,
-                            ),
-                            Container(
-                              width: 60,
-                              height: 50.0,
-                              color: Colors.white,
-                              child: RollerList(
-                                visibilityRadius: 0,
-                                enabled: false,
-                                items: model.slots,
-                                key: model.rightRoller,
-                                onSelectedIndexChanged: (value) {
-                                  setState(() {
-                                    model.third = value;
-                                  });
-                                },
-                              ),
-                            )
-                          ],
+                              Container(
+                                width: 60,
+                                height: 50.0,
+                                color: Colors.white,
+                                child: RollerList(
+                                  visibilityRadius: 0,
+                                  enabled: false,
+                                  items: model.slots,
+                                  key: model.rightRoller,
+                                  onSelectedIndexChanged: (value) {
+                                    setState(() {
+                                      model.third = value;
+                                    });
+                                  },
+                                ),
+                              )
+                            ],
+                          ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
                 const SizedBox(
                   height: 16.0,
